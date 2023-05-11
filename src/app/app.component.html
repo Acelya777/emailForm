@@ -1,0 +1,30 @@
+
+<form #emailForm="ngForm" (ngSubmit)="onSubmit()">
+
+<div class="col-md-4">
+  <label for="validationCustomUsername" class="form-label">Username</label>
+  <div class="input-group has-validation">
+    <input class="form-control ml-2" type="text" name="email"
+   [(ngModel)]="email"
+  [ngClass]="{'is-invalid':emailForm.invalid && emailForm.touched}"
+   id="validationCustomUsername" aria-describedby="inputGroupPrepend"
+   pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+   #emailControl="ngModel"
+   required
+   />
+   <ng-container *ngIf="emailForm.invalid && emailForm.touched">
+    <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+      *Zorunlu Alan
+    </div>
+    <div class="invalid-feedback" *ngIf="emailControl.errors?.['pattern']">
+      Lütfen dogru formatta giriniz
+    </div>
+  </ng-container>
+  
+  <button class="btn btn-dark " [disabled]="emailForm.invalid">Kaydet</button>
+  </div>
+</div>
+</form>
+
+<div>Form valid mi {{emailForm.valid ? "evet":"hayır"}}</div>
+<div>Form elemanları{{emailForm.value | json}}</div>
